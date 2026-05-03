@@ -58,9 +58,24 @@ The ingestion_framework.py reads this config, generates synthetic volume data fo
 **Layer 2: Airflow ETL Pipeline**
 
 <em>DAG: lmd_staffing_pipeline
+
 <img width="620" height="488" alt="image" src="https://github.com/user-attachments/assets/e70be86b-0634-4587-9c23-21b12cb7b42e" />
 
 Schedule: 0 6 * * * (daily at 6AM, before shift planning windoes open)
+
+<em> Tranformation Logic
+#### Rolling 7-day average with day-of-week seasonality
+def compute_demand_forecast(df: pd.DataFrame) -> pd.DataFrame:
+  df = df.sort_values(["site_id", "event_date"])
+  df["rolling_7d_avg"] = (
+      df.groupby(["site_id", "shift"])["package_volume"]
+      .transform(lambda x: x.rolling(7, min_periods=1).mean())
+  )
+  df["dow_index"] = df.groupby(["site_id", "shift", "day_of_week", "package_volume"] \
+                      .transform("mean") / df.groupby(["site_id", "shift"])["package_volume"] \
+                      .transform("mean")
+  df["forecast_volume"] = df["rolling_7d_avg"] * df["dow_index"]
+  df["recommended_fte"] = (df["forecast_volume"] / PACKAGES_PER_FTE_PER_SHIFT.ceil(
 
 
 
