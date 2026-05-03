@@ -56,29 +56,8 @@ sites:
 The ingestion_framework.py reads this config, generates synthetic volume data for each site/shift/day combination, and loads it into the raw layer —— no site-specifi logic anywhere in the codebase.
 
 **Layer 2: Airflow ETL Pipeline**
-DAG: lmd_staffing_pipeline
-generate_raw_volume
-        │
-        ▼
-validate_raw_quality          ◄── Great Expectations suite
-        │
-        ▼
-clean_and_normalize
-        │
-        ▼
-compute_demand_forecast        ◄── rolling 7-day avg + seasonality index
-        │
-        ▼
-generate_staffing_recommendations
-        │
-        ▼
-load_to_star_schema            ◄── DuckDB fact + dim tables
-        │
-        ▼
-publish_quality_report         ◄── JSON artifact per run
-        │
-        ▼
-update_data_contract_status
+<emp>DAG: lmd_staffing_pipeline
+<img width="620" height="488" alt="image" src="https://github.com/user-attachments/assets/e70be86b-0634-4587-9c23-21b12cb7b42e" />
 
 Schedule: 0 6 * * * (daily at 6AM, before shift planning windoes open)
 
