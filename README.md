@@ -56,7 +56,8 @@ sites:
 The ingestion_framework.py reads this config, generates synthetic volume data for each site/shift/day combination, and loads it into the raw layer —— no site-specifi logic anywhere in the codebase.
 
 **Layer 2: Airflow ETL Pipeline**
-<emp>DAG: lmd_staffing_pipeline
+
+<em>DAG: lmd_staffing_pipeline
 <img width="620" height="488" alt="image" src="https://github.com/user-attachments/assets/e70be86b-0634-4587-9c23-21b12cb7b42e" />
 
 Schedule: 0 6 * * * (daily at 6AM, before shift planning windoes open)
