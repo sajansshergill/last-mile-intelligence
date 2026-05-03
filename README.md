@@ -244,4 +244,20 @@ DuckDB uses ANSI SQL with columnar storage —— identical query patterns to Am
 Site configs version-controlled artifacts, not database rows. Every site addition, shift changes, or threshold update is auditable through Git history —— critical for planning system where a configuratio error cascades into hundreds of mis-staffed shifts.
 
 **Why Claude API for SQL generation instead of fine-tuned model?**
-The schema evolves. A fine-tuned text-to-SQL model requires retraining on 
+The schema evolves. A fine-tuned text-to-SQL model requires retraining on every schema changes. Prompting Claude with the current schema context via /schema means the agent stays accurate as the data model grows —— zero training overhead.
+
+**Why reject non-SELECT statements in the agent?**
+This is a read-only analytical interfact. The validate_sql() guard prevents any INSERT, UPDATE, DROP OR DDL from being executed through the natural language layer —— a hard requirement for production data systems.
+
+## Roadmap
+- Add Kinesis Firehose simulation for real-time volume streaming
+- Implement dbt models layer on top of DuckDB for metric standardization
+- Built multi-agent workflow: orchestrator -> SQL agent -> quality agent -> summary agent
+- Add IAM role simulation for row-level security by region
+- Grafana dashboard for pipeline health + data quality KPIs
+- Extent agent to support configuration management ("add a new sir to sites.yaml")
+
+## Skills Demonstrated
+<img width="605" height="319" alt="Screenshot 2026-05-03 at 1 29 13 PM" src="https://github.com/user-attachments/assets/9dbee873-fcdf-4e07-aead-794a1145f7d2" />
+
+<em> Built to demonstrate AI-native data engineering patterns aligned with Amazon UTR Planning Tech's infrastructure direction.Share
