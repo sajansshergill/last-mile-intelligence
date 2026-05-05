@@ -1,0 +1,113 @@
+{
+  "pipeline_run_id": "streamlit_sample_2026-05-05T17-10-00",
+  "generated_at": "2026-05-05T21:10:00Z",
+  "overall_status": "PASSED",
+  "datasets": {
+    "raw_delivery_volume": {
+      "dataset": "raw_delivery_volume",
+      "contract_version": "1.0.0",
+      "overall_status": "PASSED",
+      "row_count": 54000,
+      "rules_passed": 4,
+      "rules_failed": 0,
+      "rule_results": [
+        {
+          "rule": "null_check",
+          "status": "PASSED",
+          "columns_checked": [
+            "site_id",
+            "event_date",
+            "shift",
+            "package_volume"
+          ],
+          "null_rate": 0.0
+        },
+        {
+          "rule": "volume_range_check",
+          "status": "PASSED",
+          "column": "package_volume",
+          "range": [
+            0,
+            100000
+          ],
+          "violations": 0
+        },
+        {
+          "rule": "duplicate_check",
+          "status": "PASSED",
+          "keys": [
+            "site_id",
+            "event_date",
+            "shift"
+          ],
+          "duplicate_rows": 0
+        },
+        {
+          "rule": "allowed_values_check",
+          "status": "PASSED",
+          "column": "shift",
+          "allowed": [
+            "early_morning",
+            "afternoon",
+            "night"
+          ]
+        }
+      ],
+      "certification_status": "certified"
+    },
+    "fact_staffing_demand": {
+      "total_rows": 54000,
+      "sites_covered": 50,
+      "dates_covered": 360,
+      "total_volume": 128765432,
+      "avg_package_volume": 2384.5,
+      "avg_forecast_volume": 2401.8,
+      "avg_recommended_fte": 13.4,
+      "avg_actual_fte": 13.1,
+      "avg_variance_pct": -0.0187,
+      "sla_attainment_rate": 0.9215,
+      "sla_breaches": 4239,
+      "understaffed_shifts": 3120,
+      "overstaffed_shifts": 1119,
+      "status": "AVAILABLE"
+    }
+  },
+  "forecast_quality": {
+    "row_count": 54000,
+    "columns_present": [
+      "actual_fte",
+      "dow_index",
+      "forecast_volume",
+      "package_volume",
+      "recommended_fte",
+      "rolling_7d_avg",
+      "sla_met",
+      "variance_pct"
+    ],
+    "avg_package_volume": 2384.5,
+    "min_package_volume": 148,
+    "max_package_volume": 9875,
+    "avg_forecast_volume": 2401.8,
+    "min_forecast_volume": 163.2,
+    "max_forecast_volume": 10122.7,
+    "avg_recommended_fte": 13.4,
+    "min_recommended_fte": 1,
+    "max_recommended_fte": 57,
+    "avg_actual_fte": 13.1,
+    "min_actual_fte": 1,
+    "max_actual_fte": 60,
+    "avg_variance_pct": -0.0187,
+    "min_variance_pct": -0.3333,
+    "max_variance_pct": 0.2857,
+    "sla_attainment_rate": 0.9215,
+    "sla_breaches": 4239,
+    "understaffed_shifts": 3120,
+    "overstaffed_shifts": 1119,
+    "status": "AVAILABLE"
+  },
+  "sla": {
+    "status": "MET",
+    "attainment_rate": 0.9215,
+    "threshold": 0.85
+  }
+}

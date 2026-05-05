@@ -16,7 +16,6 @@ st.set_page_config(
 )
 
 
-@st.cache_data
 def load_latest_report() -> dict[str, Any] | None:
     if not LATEST_REPORT.exists():
         return None
